@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pollination Data and Predictions 🐝</title>
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <!-- Google Fonts - Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* Body and Background */
+        body {
+            background-color: #f3f4f6; /* Light gray background */
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #1e293b; /* Deep blue-gray */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            color: #fbbf24 !important; /* Yellow accent */
+            font-weight: 700;
+            font-size: 24px;
+        }
+        .navbar-nav .nav-link {
+            color: #e2e8f0 !important; /* Light gray links */
+            font-weight: 500;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #fbbf24 !important; /* Yellow hover */
+        }
+
+        /* Right-aligned Buttons */
+        .navbar-buttons {
+            margin-left: auto;
+        }
+        .btn-custom {
+            background-color: #fbbf24;
+            color: #1e293b;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .btn-custom:hover {
+            background-color: #f59e0b;
+            transform: translateY(-2px);
+        }
+        .btn-light {
+            background-color: #e2e8f0;
+            color: #1e293b;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            color: #fff;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .hero-section h1 {
+            font-size: 42px;
+            font-weight: 700;
+        }
+        .hero-section p {
+            font-size: 18px;
+        }
+
+        /* Container Card */
+        .container-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: -40px;
+        }
+
+        /* Table Centering */
+        .table-responsive {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .table {
+            width: 80%;
+            border-collapse: collapse;
+        }
+        .table th {
+            background-color: #1e293b;
+            color: #fff;
+            font-weight: 600;
+            padding: 12px;
+        }
+        .table td {
+            padding: 10px;
+            text-align: center;
+        }
+        .table tbody tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        /* Badges */
+        .badge-success {
+            background-color: #10b981;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 20px;
+        }
+        .badge-danger {
+            background-color: #ef4444;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 5px 0;
+            font-size: 12px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Floating Add Button */
+        .btn-floating {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #fbbf24;
+            color: #1e293b;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            font-size: 24px;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .btn-floating:hover {
+            background-color: #f59e0b;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand" href="/">
+                🐝 Pollination Hub
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <h1>Track Pollination Success Effortlessly 🌸</h1>
+            <p>Monitor flower density and bee activity to predict pollination outcomes.</p>
+            <a href="/add" class="btn btn-custom mt-3">Get Started ➡️</a>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container mt-5">
+        <div class="container-card">
+            <h2 class="text-center mb-4" style="color: #1e293b;">📊 Stored Pollination Data</h2>
+
+            <!-- Data Table -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Flower Density 🌸</th>
+                            <th>Bee Activity/Distance 🐝</th>
+                            <th>Pollination Success ✅/❌</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in data %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                            <td>
+                                {% if row[3] == 1 %}
+                                    <span class="badge badge-success">Success ✅</span>
+                                {% else %}
+                                    <span class="badge badge-danger">Failure ❌</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="text-center mt-4">
+                <a href="/add" class="btn btn-outline-success btn-lg me-3">➕ Add More Data</a>
+                <a href="/predict" class="btn btn-primary btn-lg">🔮 Make a Prediction</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Add Button -->
+    <a href="/add" class="btn-floating" title="Add New Data">
+        ➕
+    </a>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2025 Pollination Hub | Designed with ❤️ by SriBhagavathi</p>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

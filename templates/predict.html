@@ -1,0 +1,171 @@
+<!-- templates/predict.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pollination Prediction 🔮</title>
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <!-- Google Fonts - Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* General Styles */
+        body {
+            background-color: #f3f4f6;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #1e293b;
+            padding: 10px 0; /* Increased height */
+        }
+        .navbar-brand {
+            color: #fbbf24 !important;
+            font-weight: 700;
+            font-size: 1.3rem; /* Slightly larger brand text */
+        }
+        .navbar-nav .nav-link {
+            color: #e2e8f0 !important;
+            font-size: 1.1rem;
+        }
+        .navbar-buttons {
+            margin-left: auto;
+        }
+
+        /* Container Styling */
+        .container-wrapper {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #1e293b;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        /* Form Styles */
+        label {
+            font-weight: 500;
+            color: #1e293b;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+        }
+        button {
+            width: 100%;
+            background-color: #fbbf24;
+            color: #1e293b;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #f59e0b;
+            transform: translateY(-2px);
+        }
+
+        /* Prediction Result */
+        .prediction-result {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .prediction-result h2 {
+            color: #14b8a6;
+            font-weight: 600;
+        }
+
+        /* Back Link */
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            color: #1e293b;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 5px 0;
+            font-size: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">🐝 Pollination Hub</a>
+        </div>
+    </nav>
+
+    <!-- Centered Container Wrapper -->
+    <div class="container-wrapper">
+        <div class="container-card">
+            <h1>Pollination Prediction 🔮</h1>
+
+            <!-- Prediction Form -->
+            <form action="/predict" method="POST">
+                <label for="feature1">Flower Density:</label>
+                <input type="text" id="feature1" name="feature1" placeholder="Enter flower density" required>
+
+                <label for="feature2">Bee Activity Level:</label>
+                <input type="text" id="feature2" name="feature2" placeholder="Enter bee activity level" required>
+
+                <button type="submit">🔍 Predict</button>
+            </form>
+
+            <!-- Prediction Result -->
+            {% if prediction %}
+            <div class="prediction-result">
+                <h2>Prediction Result: {{ prediction }}</h2>
+            </div>
+            {% endif %}
+
+            <!-- Back Link -->
+            <div class="back-link">
+                <a href="/">⬅️ Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2025 Pollination Hub | Designed with ❤️ by SriBhagavathi</p>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
